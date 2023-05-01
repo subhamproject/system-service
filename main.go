@@ -22,10 +22,11 @@ func main() {
 	port := GetEnvParam("KAFKA_PORT", "9092")
 	topic := GetEnvParam("KAFKA_TOPIC", "demoTopic")
 
-	fmt.Printf("Kafka host:%s , ,port:%s \n", host, port)
+	fmt.Printf("Kafka host:%s , ,port:%s, ,topic:%s \n", host, port, topic)
+	kafkaServer := host + ":" + port
 
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
-		"bootstrap.servers": "localhost:9092",
+		"bootstrap.servers": kafkaServer,
 		"group.id":          "myGroup",
 		"auto.offset.reset": "earliest",
 	})
