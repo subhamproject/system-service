@@ -21,14 +21,16 @@ func main() {
 	host := GetEnvParam("KAFKA_HOST", "localhost")
 	port := GetEnvParam("KAFKA_PORT", "9092")
 	topic := GetEnvParam("KAFKA_TOPIC", "demoTopic")
+	maxPollInterval := GetEnvParam("KAFKA_MAX_POLL_INTERVAL_MS", "60000")
 
 	fmt.Printf("Kafka host:%s , ,port:%s, ,topic:%s \n", host, port, topic)
 	kafkaServer := host + ":" + port
 
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
-		"bootstrap.servers": kafkaServer,
-		"group.id":          "myGroup",
-		"auto.offset.reset": "earliest",
+		"bootstrap.servers":    kafkaServer,
+		"group.id":             "myGroup",
+		"auto.offset.reset":    "earliest",
+		"max.poll.interval.ms": maxPollInterval,
 	})
 
 	if err != nil {
