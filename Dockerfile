@@ -17,7 +17,7 @@ EXPOSE 8083
 
 FROM debian:buster-slim
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    ca-certificates && \
+    ca-certificates curl wget netcat && \
     rm -rf /var/lib/apt/lists
 
 
