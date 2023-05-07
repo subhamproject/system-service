@@ -79,10 +79,10 @@ import (
 
 func main() {
 
-	clientCertFile := GetEnvParam("KAFKA_CLIENT_CERT", "/home/om/go/src/github.com/subhamproject/devops-demo/certs/system.cert.pem")
-	clientKeyFile := GetEnvParam("KAFKA_CLIENT_KEY", "/home/om/go/src/github.com/subhamproject/devops-demo/certs/system.key.pem")
-	caCertFile := GetEnvParam("KAFKA_CA_CERT", "/home/om/go/src/github.com/subhamproject/devops-demo/certs/kafka-ca.crt")
-	kafkaservers := GetEnvParam("KAFKA_SERVERS", "kafka1:19091,kafka2:29092,kafka3:39093")
+	clientCertFile := GetEnvParam("KAFKA_CLIENT_CERT", "/home/om/go/src/github.com/subhamproject/devops-demo/certs/kafka.system.cert")
+	clientKeyFile := GetEnvParam("KAFKA_CLIENT_KEY", "/home/om/go/src/github.com/subhamproject/devops-demo/certs/kafka.system.key")
+	caCertFile := GetEnvParam("KAFKA_CA_CERT", "/home/om/go/src/github.com/subhamproject/devops-demo/certs/kafka.system.pem")
+	kafkaservers := GetEnvParam("KAFKA_SERVERS", "kafka1:9091")
 	servers := strings.Split(kafkaservers, ",")
 
 	fmt.Println("kafka servers: ", servers)
