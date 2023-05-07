@@ -33,11 +33,10 @@ func getKafkaReader(kafkaURL, topic, groupID string) *kafka.Reader {
 	}
 	brokers := strings.Split(kafkaURL, ",")
 	return kafka.NewReader(kafka.ReaderConfig{
-		Brokers:  brokers,
-		GroupID:  groupID,
-		Topic:    topic,
-		MaxBytes: 10e6, // 10MB
-		Dialer:   dialer,
+		Brokers: brokers,
+		GroupID: groupID,
+		Topic:   topic,
+		Dialer:  dialer,
 	})
 }
 
@@ -48,7 +47,7 @@ func main() {
 	kafkaURL := GetEnvParam("KAFKA_SERVERS", "localhost:19091,localhost:29092,localhost:39093")
 	fmt.Println("kafka kafkaURL: ", kafkaURL)
 
-	kafkaReader := getKafkaReader(kafkaURL, groupID, topic)
+	kafkaReader := getKafkaReader(kafkaURL, topic, groupID)
 
 	defer kafkaReader.Close()
 
@@ -58,7 +57,7 @@ func main() {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		fmt.Printf("message at topic:%v partition:%v offset:%v	%s = %s\n", m.Topic, m.Partition, m.Offset, string(m.Key), string(m.Value))
+		fmt.Printf("received message at topic:%v partition:%v offset:%v	%s = %s\n", m.Topic, m.Partition, m.Offset, string(m.Key), string(m.Value))
 	}
 }
 
